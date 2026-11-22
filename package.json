@@ -1,0 +1,280 @@
+{
+  "name": "zovo-qfx-viewer",
+  "displayName": "QFX OFX Statement Viewer",
+  "description": "Open Quicken .qfx and QuickBooks .qbo bank statements in VS Code: transactions, balances and totals, read locally with nothing to install.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1B1F2A",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/qfx-viewer-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/theluckystrike/qfx-viewer-vscode/issues"
+  },
+  "homepage": "https://github.com/theluckystrike/qfx-viewer-vscode#readme",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other",
+    "Data Science"
+  ],
+  "keywords": [
+    "qfx",
+    "ofx",
+    "qbo",
+    "quicken",
+    "bank statement"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onUri",
+    "onCustomEditor:zovo-qfx.viewer"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "zovo-qfx.viewer",
+        "displayName": "QFX OFX Statement Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.{qfx,QFX,Qfx}"
+          },
+          {
+            "filenamePattern": "*.{qbo,QBO,Qbo}"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "zovoQfx.openWith",
+        "title": "Open in QFX OFX Statement Viewer",
+        "category": "QFX Viewer",
+        "icon": "$(table)"
+      },
+      {
+        "command": "zovoQfx.openSample",
+        "title": "Open the Sample QFX Statement",
+        "category": "QFX Viewer"
+      },
+      {
+        "command": "zovoQfx.openWalkthrough",
+        "title": "Get Started",
+        "category": "QFX Viewer"
+      },
+      {
+        "command": "zovoQfx.moreViewers",
+        "title": "More free tools by Zovo",
+        "category": "QFX Viewer"
+      },
+      {
+        "command": "zovoQfx.supportDeveloper",
+        "title": "Support the developer",
+        "category": "QFX Viewer"
+      },
+      {
+        "command": "zovoQfx.exportCsvQbo",
+        "title": "Export statement to CSV and QBO (Pro, 1 free try)",
+        "category": "QFX Viewer"
+      },
+      {
+        "command": "zovoQfx.validateStatement",
+        "title": "Validate statement balances and FITIDs (Pro, 1 free try)",
+        "category": "QFX Viewer"
+      },
+      {
+        "command": "zovoQfx.zovoPro.exportCsvQbo",
+        "title": "Zovo Pro: Export statement to CSV and QBO"
+      },
+      {
+        "command": "zovoQfx.zovoPro.validateStatement",
+        "title": "Zovo Pro: Validate statement balances and FITIDs"
+      },
+      {
+        "command": "zovoQfx.zovoTitle.exportCsvQbo",
+        "title": "Zovo Pro: Export statement to CSV and QBO"
+      },
+      {
+        "command": "zovoQfx.zovoTitle.validateStatement",
+        "title": "Zovo Pro: Validate statement balances and FITIDs"
+      },
+      {
+        "command": "zovoQfx.getPro",
+        "title": "Get Zovo Pro (USD 19 once, all Zovo extensions)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoQfx.payWithPayPal",
+        "title": "Pay for Zovo Pro with PayPal (USD 19, team of 5 USD 59)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoQfx.unlockWithSponsors",
+        "title": "I already paid: activate with GitHub Sponsors",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoQfx.enterLicenseKey",
+        "title": "Enter Zovo Pro license key",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoQfx.removeLicense",
+        "title": "Remove Zovo Pro from this editor",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoQfx.payByCard",
+        "title": "Pay for Zovo Pro by card (USD 19)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "zovoQfx.enterKey",
+        "title": "Enter a key",
+        "category": "Zovo Pro"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "zovoQfx.zovoTitle.exportCsvQbo",
+          "when": "activeCustomEditorId == 'zovo-qfx.viewer' && config.zovoQfx.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "zovoQfx.zovoTitle.validateStatement",
+          "when": "activeCustomEditorId == 'zovo-qfx.viewer' && config.zovoQfx.showProTools",
+          "group": "zovoPro@2"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "zovoQfx.openWith",
+          "when": "resourceFilename =~ /\\.(qfx|qbo)$/i && !explorerResourceIsFolder",
+          "group": "navigation@9"
+        },
+        {
+          "command": "zovoQfx.zovoPro.exportCsvQbo",
+          "when": "resourceFilename =~ /\\.(qfx|qbo)$/i && !explorerResourceIsFolder && config.zovoQfx.showProTools",
+          "group": "zovoPro@1"
+        },
+        {
+          "command": "zovoQfx.zovoPro.validateStatement",
+          "when": "resourceFilename =~ /\\.(qfx|qbo)$/i && !explorerResourceIsFolder && config.zovoQfx.showProTools",
+          "group": "zovoPro@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "zovoQfx.exportCsvQbo",
+          "when": "config.zovoQfx.showProTools"
+        },
+        {
+          "command": "zovoQfx.validateStatement",
+          "when": "config.zovoQfx.showProTools"
+        },
+        {
+          "command": "zovoQfx.zovoPro.exportCsvQbo",
+          "when": "false"
+        },
+        {
+          "command": "zovoQfx.zovoPro.validateStatement",
+          "when": "false"
+        },
+        {
+          "command": "zovoQfx.zovoTitle.exportCsvQbo",
+          "when": "false"
+        },
+        {
+          "command": "zovoQfx.zovoTitle.validateStatement",
+          "when": "false"
+        },
+        {
+          "command": "zovoQfx.openWith",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "QFX OFX Statement Viewer",
+      "properties": {
+        "zovoQfx.maxFileMB": {
+          "type": "number",
+          "default": 50,
+          "minimum": 1,
+          "maximum": 512,
+          "description": "Files up to this size open in the QFX viewer."
+        },
+        "zovoQfx.pageSize": {
+          "type": "number",
+          "default": 100,
+          "minimum": 20,
+          "maximum": 500,
+          "description": "Rows shown on one page of the transaction table."
+        },
+        "zovoQfx.showProTools": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Zovo Pro tools (CSV/QBO export and statement validation) in the Command Palette, the Explorer menu, the editor title menu and the viewer toolbar. Everything free stays visible."
+        },
+        "zovoQfx.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask once for a Marketplace rating after 3 QFX or QBO files open without an error on 2 different days. Choosing No thanks never asks again. Nothing is sent anywhere."
+        },
+        "zovoQfx.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Rate, More free tools and Zovo Pro links at the bottom of the viewer. Nothing is sent anywhere."
+        },
+        "zovo.qfx.trial.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the 7-day Zovo Pro trial button in the Pro panel."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "zovoQfx.start",
+        "title": "Get started with the QFX OFX Statement Viewer",
+        "description": "Read Quicken .qfx and QuickBooks .qbo bank statements in VS Code, locally.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open a QFX or QBO statement",
+            "description": "Click any .qfx or .qbo file in the Explorer to view account facts, balances, transactions and totals.\n[Open the sample QFX statement](command:zovoQfx.openSample)",
+            "media": {
+              "image": "images/screenshot.png",
+              "altText": "A QFX bank statement open in the viewer with transactions, balances and header facts."
+            },
+            "completionEvents": [
+              "onCommand:zovoQfx.openSample"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node scripts/test.js",
+    "package": "npx -y @vscode/vsce@3 package --no-dependencies"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike/sponsorships?tier_id=679878"
+  }
+}
